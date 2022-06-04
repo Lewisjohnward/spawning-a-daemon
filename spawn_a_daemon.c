@@ -15,15 +15,16 @@ int main (void)
     {
         exit(EXIT_SUCCESS);
     }
+    // creates a new session if the calling process is not a process group leader.
     sid = setsid();
     if (sid < 0)
     {
         exit(EXIT_FAILURE);
     }
-  /* Close out the standard file descriptors */
-        close(STDIN_FILENO);
-        close(STDOUT_FILENO);
-        close(STDERR_FILENO);
+    // Close out the standard file descriptors
+    close(STDIN_FILENO);
+    close(STDOUT_FILENO);
+    close(STDERR_FILENO);
     char *args[] = {"./my_daemon", "arg1", NULL};
     execvp(args[0], args);
 }
